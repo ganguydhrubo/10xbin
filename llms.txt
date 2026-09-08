@@ -1,0 +1,23 @@
+# 10xbin — Autonomous AI Revenue Infrastructure
+
+> 10xbin engineers autonomous AI revenue infrastructure for high-growth enterprises. Bridges media spend, qualification agents, and bank-settled margin reconciliation into a single high-velocity architecture.
+
+## Overview
+- Website: https://10xbin.com
+- Production URL: https://10xbin.vercel.app
+- Source: https://github.com/ganguydhrubo/10xbin
+- Architecture: Autonomous Revenue Engine & 14-Day Sprint
+
+## Core Value Propositions
+1. Sub-second Intake Pulse: Real-time autonomous lead qualification via WhatsApp, voice, and conversational agents in under 8 seconds.
+2. Signal Loss Mitigation: Consent-aware first-party server-side attribution reconciliation bridging iOS/Safari pixel blackout.
+3. Cash Settlement Loop: Directly reconciles reported platform ROAS with bank-settled margin, accounting for cancellations, refunds, and fulfillment fees.
+4. INR Director Console: Interactive financial sensitivity calculator modeling revenue recovery based on monthly media spend (₹1L to ₹1Cr) and human response lag.
+
+## 14-Day Execution Protocol
+- Chapter I (Days 01–03): Ingestion Audit & Revenue System Blueprint.
+- Chapter II (Days 04–10): Agent Deployment & Integrated Intake Pipeline.
+- Chapter III (Days 11–14): Margin Lock, Telemetry Instrumentation & Handover.
+
+## Ingestion & Consultation
+Submit inquiries via the consultation terminal on https://10xbin.com/#commission or dispatch directly to https://10xbin.com/api/consultation.
