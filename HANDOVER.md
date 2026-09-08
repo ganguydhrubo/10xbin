@@ -27,10 +27,10 @@ The campaign images are 1672 × 941 PNGs. The private website is hosted at the S
 - Consultation terminal with validation and local JSON brief download.
 - Responsive layouts, reduced-motion support, keyboard focus states, and privacy notes.
 
-## What remains before a commercial launch
+## Commercial launch progress & status
 
-1. Connect a real consultation delivery or booking service. The current form **only prepares a local downloadable brief**; no appointment is booked, email sent, or information transmitted.
-2. Connect and configure 10xbin.com, then explicitly choose the public audience. The current published website is owner-private.
+1. [COMPLETED] Consultation Delivery Service: Live serverless endpoint connected at `/api/consultation`. Ingests briefs, logs submissions, dispatches to optional `LEAD_WEBHOOK_URL` / `DISCORD_WEBHOOK_URL` / `SLACK_WEBHOOK_URL`, and provides immediate client confirmation along with JSON brief download.
+2. [CONFIGURED] Domains: Configured `10xbin.com` and `www.10xbin.com` on Vercel production. Point DNS A record to `76.76.21.21` at GoDaddy. Production is live at https://10xbin.vercel.app.
 3. Replace illustrative statistics with approved, evidenced claims if they are to be presented as factual benchmarks. The 38% tracking loss and 80% lead-decay figures are clearly labeled assumptions from the brief.
 4. Review the financial assumptions against real business data. The model is a sensitivity illustration, not a forecast or guarantee. Eight-second intake is a design target, not a measured live performance claim.
 5. Connect real ad, messaging, voice, CRM, and payment integrations if operational behavior is required. The blueprint currently describes a conceptual system.
