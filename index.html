@@ -1986,6 +1986,414 @@ button:disabled {
   }
 }
 
+/* ==========================================================================
+   ACT I: 24FPS CINEMA THEATER & VIDEO MANIFESTO
+   ========================================================================== */
+.cinema-section {
+  padding-top: 80px;
+  padding-bottom: 100px;
+  position: relative;
+  z-index: 2;
+}
+
+.cinema-badge {
+  font: 11px/1.4 var(--mono);
+  letter-spacing: 1px;
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 8px 14px;
+  border-radius: 2px;
+}
+
+.cinema-theater {
+  position: relative;
+  margin-top: 36px;
+  margin-bottom: 40px;
+  border-radius: 4px;
+}
+
+/* Ambient dynamic back-glow */
+.cinema-glow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.18) 0%, rgba(14, 165, 233, 0.08) 45%, transparent 75%);
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+  animation: cinemaPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes cinemaPulse {
+  0% { opacity: 0.5; transform: scale(0.98); }
+  100% { opacity: 0.9; transform: scale(1.02); }
+}
+
+/* Brutalist Technical Cinema Frame */
+.cinema-frame {
+  position: relative;
+  z-index: 1;
+  background: #070b14;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85), 0 0 40px rgba(56, 189, 248, 0.15);
+  overflow: hidden;
+}
+
+.cinema-corner {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--cyan);
+  opacity: 0.6;
+  line-height: 1;
+  z-index: 10;
+  pointer-events: none;
+}
+.cinema-corner-tl { top: 6px; left: 8px; }
+.cinema-corner-tr { top: 6px; right: 8px; }
+.cinema-corner-bl { bottom: 6px; left: 8px; }
+.cinema-corner-br { bottom: 6px; right: 8px; }
+
+/* Top Telemetry HUD */
+.cinema-hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(5, 8, 17, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font: 11px var(--mono);
+  letter-spacing: 0.8px;
+  color: #8c95a4;
+}
+
+.cinema-hud-top .hud-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  margin-right: 6px;
+}
+
+/* Cinema Screen */
+.cinema-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #020409;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cinema-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Play Orb Overlay */
+.cinema-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(5, 8, 17, 0.45);
+  border: none;
+  cursor: pointer;
+  z-index: 5;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.cinema-play-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.orb-pulse {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.2);
+  animation: orbRipple 2.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes orbRipple {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.orb-ring {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 1px dashed rgba(56, 189, 248, 0.6);
+  animation: orbRotate 16s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes orbRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.orb-core {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.cinema-play-overlay:hover .orb-core {
+  transform: scale(1.1);
+  box-shadow: 0 0 50px rgba(56, 189, 248, 0.9), inset 0 1px 1px #fff;
+}
+
+.orb-glyph {
+  font-size: 24px;
+  color: #04121b;
+  margin-left: 3px;
+  line-height: 1;
+}
+
+.orb-label {
+  font: 11px var(--mono);
+  letter-spacing: 2px;
+  color: #f1f5f9;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  padding: 6px 14px;
+  background: rgba(5, 8, 17, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+/* Bottom HUD Control Bar */
+.cinema-hud-bottom {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: rgba(5, 8, 17, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font: 11px var(--mono);
+  color: #94a3b8;
+}
+
+.hud-controls-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.hud-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font: 11px var(--mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--cyan);
+  color: #ffffff;
+}
+
+.hud-unmute-btn {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+}
+
+.hud-unmute-btn:hover {
+  background: rgba(245, 158, 11, 0.22);
+  border-color: #f59e0b;
+  color: #fff;
+}
+
+.hud-time {
+  font-family: var(--mono);
+  letter-spacing: 0.5px;
+  color: #cbd5e1;
+  min-width: 90px;
+}
+
+/* Scrubber / Progress Bar */
+.cinema-scrubber-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: height 0.15s ease;
+}
+
+.cinema-scrubber-track:hover {
+  height: 8px;
+}
+
+.cinema-scrubber-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%);
+  box-shadow: 0 0 10px var(--cyan);
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.hud-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.hud-pill {
+  font: 10px var(--mono);
+  letter-spacing: 0.8px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  color: #64748b;
+}
+
+.hud-fs-btn {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+/* Chapter breakdown grid below player */
+.cinema-chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.cinema-chapter-card {
+  background: rgba(11, 15, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  padding: 20px 22px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.cinema-chapter-card:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  background: rgba(11, 15, 25, 0.9);
+  transform: translateY(-2px);
+}
+
+.chapter-code {
+  font: 10px var(--mono);
+  letter-spacing: 1px;
+  color: var(--cyan);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cinema-chapter-card h4 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: #f1f5f9;
+}
+
+.cinema-chapter-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #8c95a4;
+  margin: 0;
+}
+
+/* Hero Cinema CTA */
+.cinema-action {
+  background: rgba(14, 165, 233, 0.09);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #e0f2fe;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+}
+
+.cinema-action:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: #38bdf8;
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.4);
+}
+
+.cinema-action .play-orb-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: #04121b;
+  font-size: 10px;
+  padding-left: 2px;
+  box-shadow: 0 0 12px var(--cyan);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cinema-action:hover .play-orb-icon {
+  transform: scale(1.15);
+  box-shadow: 0 0 18px #7dd3fc;
+}
+
+/* Responsive queries */
+@media (max-width: 900px) {
+  .cinema-chapters-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .cinema-hud-top .hud-meta {
+    display: none;
+  }
+  .hud-controls-right .hud-pill {
+    display: none;
+  }
+  .hud-unmute-btn .unmute-text {
+    display: none;
+  }
+}
+
 /* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -2001,10 +2409,11 @@ button:disabled {
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 <div class="telemetry-strip shell"><span>FRAME: 24FPS <span class="strip-extra">// ASPECT: 2.39:1 CINEMASCOPE</span></span><span><i class="live-dot"></i>PIPELINE: LIVE <span class="strip-extra">// INTERFACE DEMO</span></span></div>
-<header class="site-nav shell"><a class="brand" href="#" aria-label="10xbin home">10xbin<span>®</span></a><nav class="nav-links" aria-label="Main navigation"><a href="#blueprint">The architecture</a><a href="#console">Director’s console</a><a href="#protocol">Execution protocol</a></nav><a class="nav-action" href="#commission">COMMISSION A SYSTEM <span>↗</span></a></header>
-<nav class="mobile-nav-strip shell" aria-label="Quick mobile navigation"><a href="#blueprint">Architecture</a><a href="#anatomy">Leaks</a><a href="#console">Simulator</a><a href="#protocol">Sprint</a><a href="#commission">Commission</a></nav>
+<header class="site-nav shell"><a class="brand" href="#" aria-label="10xbin home">10xbin<span>®</span></a><nav class="nav-links" aria-label="Main navigation"><a href="#manifesto">Manifesto film</a><a href="#blueprint">The architecture</a><a href="#console">Director’s console</a><a href="#protocol">Execution protocol</a></nav><a class="nav-action" href="#commission">COMMISSION A SYSTEM <span>↗</span></a></header>
+<nav class="mobile-nav-strip shell" aria-label="Quick mobile navigation"><a href="#manifesto">Film</a><a href="#blueprint">Architecture</a><a href="#anatomy">Leaks</a><a href="#console">Simulator</a><a href="#protocol">Sprint</a><a href="#commission">Commission</a></nav>
 <main id="main">
-<section class="hero"><div class="hero-image" role="img" aria-label="Cross-hatched data monolith rising through cold cyan cinematic haze"></div><div class="hero-content shell reveal"><div class="eyebrow">AUTONOMOUS AI REVENUE INFRASTRUCTURE</div><h1>REVENUE RUNS<br>ON <em>ARCHITECTURE,</em><br>NOT HOPE.</h1><p class="hero-description">The agency-retainer era ends where engineering begins.<br><strong>We build the system between the click and the cash.</strong><br>Autonomous intake. Qualified intent. Accountable revenue.</p><div class="hero-actions"><a class="action primary" href="#commission">COMMISSION SYSTEM ARCHITECTURE <span class="arrow">↗</span><span>[14-DAY SPRINT]</span></a><a class="text-action" href="#blueprint">VIEW SYSTEM BLUEPRINT <span>↓</span></a></div></div><span class="hero-caption">FIG. 001 // THE REVENUE MONOLITH</span><div class="hero-bottom"><span>↓ &nbsp; SCROLL TO ENTER THE SYSTEM</span><span class="scene-title">ENGINEERING, AT CINEMATIC SCALE.<small>01 / INK. LIGHT. INFRASTRUCTURE.</small></span></div></section>
+<section class="hero"><div class="hero-image" role="img" aria-label="Cross-hatched data monolith rising through cold cyan cinematic haze"></div><div class="hero-content shell reveal"><div class="eyebrow">AUTONOMOUS AI REVENUE INFRASTRUCTURE</div><h1>REVENUE RUNS<br>ON <em>ARCHITECTURE,</em><br>NOT HOPE.</h1><p class="hero-description">The agency-retainer era ends where engineering begins.<br><strong>We build the system between the click and the cash.</strong><br>Autonomous intake. Qualified intent. Accountable revenue.</p><div class="hero-actions"><a class="action primary" href="#commission">COMMISSION SYSTEM ARCHITECTURE <span class="arrow">↗</span><span>[14-DAY SPRINT]</span></a><a class="action cinema-action" href="#manifesto"><span class="play-orb-icon">▶</span> WATCH MANIFESTO <span>[0:29 // 4K]</span></a><a class="text-action" href="#blueprint">VIEW SYSTEM BLUEPRINT <span>↓</span></a></div></div><span class="hero-caption">FIG. 001 // THE REVENUE MONOLITH</span><div class="hero-bottom"><span>↓ &nbsp; SCROLL TO ENTER THE SYSTEM</span><span class="scene-title">ENGINEERING, AT CINEMATIC SCALE.<small>01 / INK. LIGHT. INFRASTRUCTURE.</small></span></div></section>
+<section class="section cinema-section shell" id="manifesto" aria-labelledby="manifesto-title"><div class="section-top"><div><div class="eyebrow">ACT I // 24FPS SYSTEM MANIFESTO</div><h2 id="manifesto-title">The revenue circuit in motion.<br><span>Autonomous execution at scale.</span></h2></div><div class="cinema-badge"><span class="live-dot"></span><span>24.000 FPS // 1080P PRORES // STEREO</span></div></div><div class="cinema-theater"><div class="cinema-glow" aria-hidden="true"></div><div class="cinema-frame"><div class="cinema-corner cinema-corner-tl" aria-hidden="true">+</div><div class="cinema-corner cinema-corner-tr" aria-hidden="true">+</div><div class="cinema-corner cinema-corner-bl" aria-hidden="true">+</div><div class="cinema-corner cinema-corner-br" aria-hidden="true">+</div><div class="cinema-hud-top"><div class="hud-item"><span class="hud-dot"></span> FEED: 10XBIN_CORE // LIVE RECONCILIATION</div><div class="hud-item hud-meta">AUDIO: <span id="manifesto-audio-state">UNMUTED</span> // CODEC: H.264/AAC</div><div class="hud-item" id="manifesto-timecode-top">00:00 / 00:29</div></div><div class="cinema-screen" id="manifesto-screen"><video id="manifesto-video" playsinline preload="metadata" tabindex="0"><source src="/10xbin-manifesto.mp4" type="video/mp4">Your browser does not support video playback.</video><button type="button" class="cinema-play-overlay" id="manifesto-play-orb" aria-label="Play 10xbin Manifesto Video"><div class="orb-pulse" aria-hidden="true"></div><div class="orb-ring" aria-hidden="true"></div><div class="orb-core"><span class="orb-glyph" id="manifesto-orb-glyph">▶</span></div><span class="orb-label">START CINEMATIC PLAYBACK</span></button></div><div class="cinema-hud-bottom"><div class="hud-controls-left"><button type="button" class="hud-btn" id="manifesto-play-btn" aria-label="Play or Pause"><span id="manifesto-play-icon">▶</span></button><button type="button" class="hud-btn hud-unmute-btn" id="manifesto-unmute-btn" aria-label="Toggle Audio"><span id="manifesto-sound-icon">🔊</span><span class="unmute-text" id="manifesto-unmute-text">UNMUTE AUDIO</span></button><span class="hud-time" id="manifesto-timecode">00:00 / 00:29</span></div><div class="cinema-scrubber-track" id="manifesto-progress" role="progressbar" aria-label="Video scrubber" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" tabindex="0"><div class="cinema-scrubber-fill" id="manifesto-progress-fill"></div></div><div class="hud-controls-right"><span class="hud-pill">2.39:1 CINEMASCOPE</span><button type="button" class="hud-btn hud-fs-btn" id="manifesto-fs-btn" aria-label="Toggle Fullscreen"><span>⛶</span></button></div></div></div></div><div class="cinema-chapters-grid"><div class="cinema-chapter-card"><span class="chapter-code">ACT 1.1 // 00:00 — 00:09</span><h4>Ad Traffic & Signal Blackout</h4><p>Tracking the breakdown where Meta and Google attribution signals fail to reach downstream systems.</p></div><div class="cinema-chapter-card"><span class="chapter-code">ACT 1.2 // 00:10 — 00:19</span><h4>Sub-Second Autonomous Pulse</h4><p>Real-time conversational intelligence engages high-intent leads within 8 seconds before intent decay.</p></div><div class="cinema-chapter-card"><span class="chapter-code">ACT 1.3 // 00:20 — 00:29</span><h4>Margin Lock & Bank Settlement</h4><p>Reconciling actual cash collected against marketing spend to establish a verified source of truth.</p></div></div></section>
 <section class="blueprint-section shell" id="blueprint" aria-labelledby="blueprint-title"><div class="blueprint-top"><h2 class="eyebrow" id="blueprint-title">THE REVENUE CIRCUIT // INTERACTIVE BLUEPRINT</h2><span>SELECT A NODE TO INSPECT ↙</span></div><div class="blueprint-layout"><div class="blueprint-map"><svg viewBox="0 0 830 185" role="group" aria-label="Revenue circuit: ad traffic to autonomous qualification to CRM to settled cash"><defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><path d="M0 0V6" stroke="#9eb6ca" stroke-width=".5"/></pattern></defs><path class="conduit" d="M155 72H199V95H240M155 122H199V95M395 95H450M585 95H645"/><path class="signal" d="M155 72H199V95H240M395 95H450"/><path class="signal green" d="M155 122H199V95H240M585 95H645"/><text x="171" y="153" class="diagram-marker">CLICK / INTENT</text><text x="400" y="66" class="diagram-marker">QUALIFY</text><text x="594" y="66" class="diagram-marker">RECONCILE</text><g class="diagram-node" data-node="traffic" role="button" tabindex="0" aria-label="Inspect paid traffic"><rect class="node-box" x="15" y="48" width="140" height="42"/><text class="node-name" x="34" y="74">META ADS</text><rect class="node-box" x="15" y="101" width="140" height="42"/><text class="node-name" x="34" y="127">GOOGLE ADS</text></g><g class="diagram-node active" data-node="agent" role="button" tabindex="0" aria-label="Inspect autonomous intake" aria-pressed="true"><rect class="node-box" x="240" y="43" width="155" height="103"/><rect class="node-hatch" x="245" y="48" width="145" height="93"/><text class="node-meta" x="259" y="69">INTAKE / &lt;9s TARGET</text><text class="node-name" x="259" y="96">WHATSAPP</text><text class="node-name" x="259" y="115">+ VOICE AGENT</text><path d="M252 136H383" stroke="#38bdf860"/></g><g class="diagram-node" data-node="crm" role="button" tabindex="0" aria-label="Inspect qualified pipeline"><rect class="node-box" x="450" y="59" width="135" height="73"/><text class="node-meta" x="467" y="80">VERIFIED INTENT</text><text class="node-name" x="467" y="108">CRM / DEAL</text></g><g class="diagram-node" data-node="cash" role="button" tabindex="0" aria-label="Inspect settlement reconciliation"><rect class="node-box" x="645" y="43" width="165" height="103"/><rect class="node-hatch" x="650" y="48" width="155" height="93"/><text class="node-meta" x="666" y="69">SOURCE OF TRUTH</text><text class="node-name" x="666" y="97">BANK-SETTLED</text><text class="node-name" x="666" y="116">CASH ↗</text></g><text x="15" y="174" class="diagram-marker">SCHEMATIC 001.A — CONCEPTUAL FLOW, NO LIVE INTEGRATIONS</text></svg></div><div class="blueprint-detail" aria-live="polite"><span class="mono" id="node-index">NODE 02 / AUTONOMOUS INTAKE</span><h3 id="node-title">No lead left waiting.</h3><p id="node-description">WhatsApp and voice agents capture intent, qualify the opportunity, and route the next action. Sub-9-second response is a design target.</p><small id="node-footer">INPUT → INTENT → QUALIFICATION</small></div></div></section>
 <section class="section shell" id="anatomy"><div class="section-top"><div><div class="eyebrow">ACT II // THE ANTAGONIST</div><h2>The anatomy of<br><span>a bleeding funnel.</span></h2></div><p class="section-description">More media spend cannot repair a broken revenue circuit. Inspect the leaks before you scale the signal.</p></div><div class="forensic-grid"><article class="forensic-card"><span class="card-no">EVIDENCE 01 / SIGNAL LOSS</span><svg viewBox="0 0 300 90" role="img" aria-label="Illustrative tracking signal dropping out"><path d="M0 65H300M0 20H300" stroke="#8b9aae22" stroke-dasharray="2 5"/><path d="M0 45L22 45L32 10L44 75L55 40L74 40L88 20L102 67L115 38H139" fill="none" stroke="#d5deeb"/><path d="M139 38H300" stroke="#526980" stroke-dasharray="3 8"/><rect x="151" y="9" width="124" height="64" fill="url(#hatch)" opacity=".2"/><path d="M147 1V88" stroke="#38bdf8"/><text x="167" y="45" fill="#7a91aa" font-size="10" font-family="monospace">SIGNAL LOST</text></svg><div class="stat">38%<small>TRACKING DROP / SCENARIO INPUT</small></div><h3>The pixel blackout.</h3><p>Safari and iOS privacy restrictions can interrupt browser-side attribution. Design for consent-aware first-party events and server-side reconciliation.</p><div class="evidence">ILLUSTRATIVE RATE FROM THE BRIEF.<br>ACTUAL SIGNAL LOSS VARIES BY SETUP.</div></article><article class="forensic-card"><span class="card-no">EVIDENCE 02 / RESPONSE LATENCY</span><svg viewBox="0 0 300 90" role="img" aria-label="Illustrative lead retention decay curve"><path d="M0 65H300M0 20H300" stroke="#8b9aae22" stroke-dasharray="2 5"/><path d="M5 4C40 7 51 36 77 47S147 70 290 75" fill="none" stroke="#d7dce5"/><path d="M5 4C40 7 51 36 77 47S147 70 290 75L290 87H5Z" fill="url(#hatch)" opacity=".2"/><path d="M153 2V89" stroke="#f59e0b88" stroke-dasharray="2 3"/><circle cx="153" cy="69" r="3" fill="#f59e0b"/><text x="163" y="26" fill="#b29b78" font-size="10" font-family="monospace">T + 10 MIN</text></svg><div class="stat">80%<small>OPPORTUNITY LOSS / MODEL ASSUMPTION</small></div><h3>Intent has a half-life.</h3><p>Your prospect’s attention moves faster than an inbox. Model what a ten-minute human response lag could cost the pipeline.</p><div class="evidence">ILLUSTRATIVE DECAY, NOT A BENCHMARK.<br>ADJUST THE SCENARIO IN THE CONSOLE.</div></article><article class="forensic-card"><span class="card-no">EVIDENCE 03 / THE ROAS ILLUSION</span><svg viewBox="0 0 300 90" role="img" aria-label="Difference between reported returns and settled margin"><rect x="18" y="10" width="242" height="16" fill="url(#hatch)" stroke="#a1afc3" stroke-width=".5"/><rect x="18" y="44" width="91" height="16" fill="#cbd5e120" stroke="#10b981" stroke-width=".7"/><path d="M109 36V76M260 1V76" stroke="#46667b" stroke-dasharray="2 4"/><text x="120" y="57" fill="#74a79c" font-size="9" font-family="monospace">SETTLED MARGIN</text><text x="19" y="83" fill="#6e839b" font-size="9" font-family="monospace">PLATFORM ATTRIBUTION ≠ CASH</text></svg><div class="stat">₹ ≠ ROAS<small>RECONCILIATION / SOURCE OF TRUTH</small></div><h3>A dashboard isn’t a bank.</h3><p>Reported returns can hide cancellations, refunds, and fulfilment costs. Close the loop against settled cash and contribution margin.</p><div class="evidence">RECONCILE AD EVENTS WITH PAYMENTS.<br>MEASURE WHAT THE BUSINESS KEEPS.</div></article></div></section>
 <section class="section console-section shell" id="console"><div class="section-top"><div><div class="eyebrow">ACT III // THE DIRECTOR’S CONSOLE</div><h2>Change the timing.<br><span>Rewrite the outcome.</span></h2></div><span class="console-header-note">SIMULATION MODE / INR</span></div><div class="console"><div class="console-controls"><div class="control-group"><label class="console-label" for="spend"><span>01 / MONTHLY MEDIA SPEND</span><span>₹ / MONTH</span></label><output class="control-value" id="spend-value" for="spend">₹5,00,000</output><input class="range-input" id="spend" type="range" min="100000" max="10000000" step="10000" value="500000" aria-describedby="spend-scale"><div class="range-scale" id="spend-scale"><span>₹1,00,000</span><span>₹1,00,00,000</span></div></div><div class="control-group"><label class="console-label" for="lag"><span>02 / HUMAN RESPONSE LAG</span><span>MINUTES</span></label><output class="control-value" id="lag-value" for="lag">10 <span>min</span></output><input class="range-input" id="lag" type="range" min="0" max="60" step="0.5" value="10" aria-describedby="lag-scale"><div class="range-scale" id="lag-scale"><span>INSTANT</span><span>60 MINUTES</span></div></div></div><div class="console-results" aria-live="off"><span class="console-label">SCENARIO OUTPUT // MONTHLY</span><div class="result-row"><span class="result-label">Spend exposed to lead decay<small>ILLUSTRATIVE CAPITAL AT RISK</small></span><output id="burn-value">₹4,00,000</output></div><div class="recovery"><span class="console-label">POTENTIAL CONTRIBUTION RECOVERED</span><output id="recovered-value">₹1,94,037</output><small>WITH AN 8-SECOND AUTONOMOUS RESPONSE TARGET ↗</small></div><div class="result-row"><span class="result-label">Modeled qualified leads<small>BEFORE RESPONSE DECAY</small></span><output id="leads-value">500</output></div><div class="comparison-bars"><div><span>HUMAN</span><span class="bar-track"><i id="human-bar" style="width:20%"></i></span><output id="human-retention">20%</output></div><div><span>AUTONOMOUS</span><span class="bar-track"><i id="auto-bar" style="width:97.9%"></i></span><output id="auto-retention">97.9%</output></div></div><span class="sr-only" id="console-summary" aria-live="polite"></span></div></div><details class="assumptions"><summary>MODEL ASSUMPTIONS & METHODOLOGY +</summary><div class="assumptions-body"><p>This is a sensitivity model, not a forecast. Default assumptions: 80% opportunity loss after 10 minutes, ₹1,000 cost per qualified lead, 10% immediate-response close rate, and ₹5,000 contribution per closed sale. Change the economics below.</p><div class="assumption-inputs"><label for="cpl">COST PER QUALIFIED LEAD (₹)<input id="cpl" type="number" min="1" max="10000000" step="1" value="1000"></label><label for="close-rate">BASE CLOSE RATE (%)<input id="close-rate" type="number" min="0" max="100" step="0.1" value="10"></label><label for="margin">CONTRIBUTION / SALE (₹)<input id="margin" type="number" min="0" max="100000000" step="1" value="5000"></label></div><p class="formula">Retention(t) = 0.2^(t / 10), t in minutes.<br>Qualified leads = monthly spend ÷ cost per qualified lead.<br>Exposed spend = spend × (1 − human retention).<br>Potential contribution recovered = leads × base close rate × contribution per sale × max(0, retention(8 seconds) − human retention).</p><p>Exposed spend is a proxy, not realized cash loss. The recovery output excludes engineering fees, ongoing platform costs, and operational constraints. Faster human response can outperform the assumed automated response. None of the figures are guaranteed.</p><button type="button" class="text-action" id="reset-model">RESET MODEL DEFAULTS ↺</button></div></details><p class="console-foot">// THE 38% TRACKING SCENARIO IS NOT USED IN THIS MODEL. THE 80% DECAY CURVE IS AN EXPLICIT ASSUMPTION, NOT A VERIFIED INDUSTRY STATISTIC.</p><div class="filmstrip"><figure class="scene-frame"><img src="@@INTAKE@@" alt="Architectural ink command floor illuminated by amber volumetric light around a suspended intake schematic" loading="lazy" width="1536" height="864"><figcaption><span>SCENE 02 / THE SUB-SECOND INTAKE PULSE</span><b>INTAKE</b></figcaption></figure><figure class="scene-frame"><img src="@@COLLISION@@" alt="Cross-hatched telemetry streams colliding under emerald and sapphire cinematic light" loading="lazy" width="1536" height="864"><figcaption><span>SCENE 03 / THE CONDUIT COLLISION</span><b>VELOCITY</b></figcaption></figure></div></section>
@@ -2028,6 +2437,7 @@ $('booking-form').addEventListener('submit',e=>{e.preventDefault();const org=$('
 $('booking-form').addEventListener('input',()=>{currentBrief=null;$('booking-result').classList.add('hidden');$('download-brief').classList.add('hidden')});
 $('download-brief').addEventListener('click',()=>{if(!currentBrief)return;const blob=new Blob([JSON.stringify(currentBrief,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='10xbin-consultation-brief.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
 $('year').textContent=new Date().getFullYear();updateModel();
+(function initCinema(){const vid=$('manifesto-video'),orb=$('manifesto-play-orb'),orbGlyph=$('manifesto-orb-glyph'),playBtn=$('manifesto-play-btn'),playIcon=$('manifesto-play-icon'),unmuteBtn=$('manifesto-unmute-btn'),soundIcon=$('manifesto-sound-icon'),unmuteText=$('manifesto-unmute-text'),audioState=$('manifesto-audio-state'),timecode=$('manifesto-timecode'),timecodeTop=$('manifesto-timecode-top'),progress=$('manifesto-progress'),progressFill=$('manifesto-progress-fill'),fsBtn=$('manifesto-fs-btn'),screen=$('manifesto-screen');if(!vid)return;function fmtTime(sec){if(!Number.isFinite(sec)||sec<0)sec=0;const m=Math.floor(sec/60),s=Math.floor(sec%60);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}function setPlayingState(isPlaying){if(isPlaying){if(orb)orb.classList.add('hidden');if(orbGlyph)orbGlyph.textContent='❚❚';if(playIcon)playIcon.textContent='❚❚';}else{if(orb)orb.classList.remove('hidden');if(orbGlyph)orbGlyph.textContent='▶';if(playIcon)playIcon.textContent='▶';}}function togglePlay(){if(typeof vid.play!=='function')return;if(vid.paused){const p=vid.play();if(p&&typeof p.catch==='function'){p.catch(()=>{});}setPlayingState(true);}else{vid.pause();setPlayingState(false);}}function toggleAudio(){if(typeof vid.muted==='undefined')return;vid.muted=!vid.muted;if(vid.muted){if(soundIcon)soundIcon.textContent='🔈';if(unmuteText)unmuteText.textContent='UNMUTE AUDIO';if(audioState)audioState.textContent='MUTED';}else{if(soundIcon)soundIcon.textContent='🔊';if(unmuteText)unmuteText.textContent='MUTE AUDIO';if(audioState)audioState.textContent='ACTIVE / STEREO';}}orb?.addEventListener('click',togglePlay);playBtn?.addEventListener('click',togglePlay);vid.addEventListener('click',togglePlay);unmuteBtn?.addEventListener('click',toggleAudio);vid.addEventListener('play',()=>setPlayingState(true));vid.addEventListener('pause',()=>setPlayingState(false));vid.addEventListener('ended',()=>{setPlayingState(false);if(typeof vid.currentTime==='number')vid.currentTime=0;});vid.addEventListener('timeupdate',()=>{const cur=typeof vid.currentTime==='number'?vid.currentTime:0,dur=typeof vid.duration==='number'&&vid.duration>0?vid.duration:29.23,pct=dur>0?(cur/dur)*100:0;if(progressFill&&progressFill.style)progressFill.style.width=pct+'%';if(progress&&typeof progress.setAttribute==='function')progress.setAttribute('aria-valuenow',Math.round(pct));const tc=fmtTime(cur)+' / '+fmtTime(dur);if(timecode)timecode.textContent=tc;if(timecodeTop)timecodeTop.textContent=tc;});progress?.addEventListener('click',e=>{if(typeof vid.duration!=='number'||!vid.duration)return;const rect=typeof progress.getBoundingClientRect==='function'?progress.getBoundingClientRect():null;if(rect&&rect.width){const clickX=e.clientX-rect.left,pct=Math.max(0,Math.min(1,clickX/rect.width));vid.currentTime=pct*vid.duration;}});fsBtn?.addEventListener('click',()=>{const container=screen||vid;if(typeof document!=='undefined'&&document.fullscreenElement){if(typeof document.exitFullscreen==='function')document.exitFullscreen().catch(()=>{});}else{if(typeof container.requestFullscreen==='function'){container.requestFullscreen().catch(()=>{});}else if(typeof vid.webkitEnterFullscreen==='function'){vid.webkitEnterFullscreen();}}});})();
 if(document.modelContext?.registerTool){const controller=new AbortController();try{Promise.resolve(document.modelContext.registerTool({name:'model_revenue_response_scenario',description:'Update the visible illustrative revenue model. Does not send data, book anything, or predict actual financial performance.',inputSchema:{type:'object',properties:{spend:{type:'number',minimum:100000,maximum:10000000},lag:{type:'number',minimum:0,maximum:60},cpl:{type:'number',minimum:1,maximum:10000000},close:{type:'number',minimum:0,maximum:100},margin:{type:'number',minimum:0,maximum:100000000}},required:['spend','lag'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute:async input=>{if(!input||typeof input!=='object'||typeof input.spend!=='number'||typeof input.lag!=='number')throw new Error('Spend and lag are required numbers');const v={...readModel(),...input};calculateModel(v);for(const [key,id] of Object.entries({spend:'spend',lag:'lag',cpl:'cpl',close:'close-rate',margin:'margin'})){$(id).value=v[key];$(id).setCustomValidity('')}const result=updateModel();$('console').scrollIntoView({behavior:'instant'});return{status:'modeled',illustrative:true,...result}}},{signal:controller.signal})).catch(()=>{});}catch{}window.addEventListener('pagehide',()=>controller.abort(),{once:true})}
 </script>
 </body>
