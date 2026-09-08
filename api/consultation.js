@@ -98,10 +98,33 @@ export default async function handler(req, res) {
             reply_to: work_email
           })
         });
-        const resendData = await resendRes.json();
+        let resendData = await resendRes.json();
         if (resendRes.ok) {
           emailDispatched = true;
           console.log('Dispatched via Resend:', resendData.id);
+        } else if (resendData.statusCode === 403) {
+          console.log('Primary recipient restricted by unverified Resend domain; falling back to account email');
+          const fallbackRes = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${resendKey}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              from: '10XBIN Architecture <onboarding@resend.dev>',
+              to: ['gangulydhrubo@gmail.com'],
+              subject: `⚡ [10XBIN VIP Brief] ${organization} (${monthly_spend})`,
+              html: formattedHtml,
+              reply_to: work_email
+            })
+          });
+          const fallbackData = await fallbackRes.json();
+          if (fallbackRes.ok) {
+            emailDispatched = true;
+            console.log('Dispatched to account fallback via Resend:', fallbackData.id);
+          } else {
+            console.error('Resend fallback error:', fallbackData);
+          }
         } else {
           console.error('Resend error:', resendData);
         }
